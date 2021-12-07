@@ -2,6 +2,7 @@ package ch.coolsmtp;
 
 import ch.coolsmtp.mail.Group;
 import ch.coolsmtp.mail.Person;
+import ch.coolsmtp.util.Parser;
 
 public class App {
     public static void main(String[] args) {
@@ -13,5 +14,8 @@ public class App {
 
         Group g0 = new Group(0, p0, p1, p2, p3);
         System.out.println(g0);
+
+        Config config = new Config();
+        config.parseConfigFromFile("src/main/config/config.txt");
     }
 }

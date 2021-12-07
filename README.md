@@ -66,8 +66,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 Une fois les fichiers de configuration modifiés comme voulu il faut depuis la racine du projet, lancer la compilation du
 paquet à l'aide de Maven. Puis, toujours depuis la racine du projet, lancer la
 commande `java -jar target/coolsmtp-1.0-SNAPSHOT.jar`. Il faut faire bien attention à ce que la commande`java -jar` soit
-effectuée dans le répertoire où se situe le dossier `config`. Une fois l'application démarrée, les emails seront
-envoyés, moyennant des fichiers de configuration sans erreurs.
+effectuée dans le répertoire où se situe le dossier `config`.
+
+Une fois l'application démarrée, les emails seront envoyés, moyennant des fichiers de configuration sans erreurs.
 
 ## 5. Implémentation
 

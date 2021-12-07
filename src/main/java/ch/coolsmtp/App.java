@@ -20,10 +20,6 @@ public class App {
 
         SmtpClient client = new SmtpClient(config.getAddress(), config.getPort());
 
-        if(!client.sendMailPrank("bob@salut.com", "salut@bob.com", "")) {
-            System.out.println("erreur send");
-        } else {
-            System.out.println("cool send");
-        }
+
     }
 }

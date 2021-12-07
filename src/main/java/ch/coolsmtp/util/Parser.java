@@ -6,7 +6,7 @@ import java.nio.charset.*;
 public class Parser {
     private static final Charset STANDARD_CHARSET = StandardCharsets.UTF_8;
 
-    private static String getContentFromFile(String filename) {
+    public static String getContentFromFile(String filename) {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), STANDARD_CHARSET));
 

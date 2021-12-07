@@ -41,4 +41,8 @@ public class Config {
 
         return true;
     }
+
+    public String toString() {
+        return String.format("=== CONFIG ===\nServer address : %s\nServer port : %d\nNumber of groups : %d\n", address, port, nGroups);
+    }
 }

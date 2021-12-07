@@ -13,7 +13,7 @@ public class Parser {
             StringBuilder out = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null)
-                out.append(String.format("'%s'\n", line));
+                out.append(String.format("%s\n", line));
             return out.toString();
         } catch (IOException e) {
             System.out.printf("Erreur : %s", e.getMessage());

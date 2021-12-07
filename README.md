@@ -4,7 +4,7 @@
 
 ## 1. Introduction
 
-Ce programme envoi des e-mails "prank" forgés. Ceci est fait avec l'API Socket en créant un client SMTP.
+Ce programme envoie des e-mails "prank" forgés. Ceci est fait avec l'API Socket en créant un client SMTP.
 
 Ce programme permet de voir à quel point il est facile de faire de faux e-mails.
 

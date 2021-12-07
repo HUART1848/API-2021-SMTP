@@ -12,7 +12,7 @@ public class App {
         System.out.println("Loading config...");
 
         if (!config.parseConfigFromFile("config/config.txt")) {
-            System.out.println("ERROR while attempting to load the config file.\n" +
+            System.out.println("ERROR: Failure while attempting to load the config file.\n" +
                     "Please check for config file existence and/or fix config file syntax");
             return;
         }
@@ -21,20 +21,27 @@ public class App {
         System.out.println(config);
 
         /* Groups loading */
+        System.out.println("Loading groups...");
         Group[] groups;
         try {
             groups = Group.parseGroupFromFile("config/users.txt", config.getNumberOfGroups());
         } catch (ArithmeticException e) {
-            System.out.printf("Erreur : %s", e.getMessage());
+            System.out.println("ERROR: There is not enough users for the specified number of groups");
+            return;
+        } catch (IllegalArgumentException e) {
+            System.out.println("ERROR: Invalid email address");
             return;
         }
+        System.out.println("Groups loaded");
 
         /* Sending command */
+        System.out.println("=== PRANK ===");
+
         SmtpClient client = new SmtpClient(config.getAddress(), config.getPort());
         Message message = new Message();
         for (int i = 0; i < groups.length; ++i) {
             if (!message.setRandomMessageFromFile("config/messages.txt")) {
-                System.out.println("ERROR while attempting to load the message.\n" +
+                System.out.println("ERROR: Failure while attempting to load the message.\n" +
                         "Please check for 'messages.txt' file existence and/or fix 'messages.txt' file syntax");
                 return;
             }

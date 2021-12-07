@@ -20,25 +20,20 @@ public class SmtpClient {
     public boolean sendMailPrank(String from, String[] to, String content) {
         try {
             String tmp;
-            String response = "";
 
             Socket socket = new Socket(serverAddress, port);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), STANDARD_CHARSET));
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), STANDARD_CHARSET));
 
-            response = in.readLine();
-            if (!response.startsWith("220"))
+            if (!in.readLine().startsWith("220"))
                 return false;
 
             /* EHLO */
-            response = "";
 
             out.write(String.format("EHLO %s\r\n", NAME));
             out.flush();
 
             while ((tmp = in.readLine()) != null) {
-                System.out.println(tmp);
-                response += tmp;
                 if (!tmp.startsWith("250"))
                     return false;
                 else if (tmp.startsWith("250 "))
@@ -49,9 +44,8 @@ public class SmtpClient {
             out.write(String.format("MAIL FROM: %s\r\n", from));
             out.flush();
 
-            if (!(response = in.readLine()).startsWith("250"))
+            if (!(in.readLine()).startsWith("250"))
                 return false;
-            System.out.println(response);
 
             /* RCPT TO*/
             out.write("RCPT TO:");
@@ -59,32 +53,28 @@ public class SmtpClient {
                 out.write(String.format("%s%s", to[i], i == to.length - 1 ? "\r\n" : ","));
             out.flush();
 
-            if (!(response = in.readLine()).startsWith("250"))
+            if (!(in.readLine()).startsWith("250"))
                 return false;
-            System.out.println(response);
 
             /* DATA */
             out.write("DATA\r\n");
             out.flush();
 
-            if (!(response = in.readLine()).startsWith("354"))
+            if (!(in.readLine()).startsWith("354"))
                 return false;
-            System.out.println(response);
 
             out.write(String.format("Content-type: text/plain; charset=utf-8\r\n%s\r\n.\r\n", content));
             out.flush();
 
-            if (!(response = in.readLine()).startsWith("250"))
+            if (!(in.readLine()).startsWith("250"))
                 return false;
-            System.out.println(response);
 
             /* QUIT */
             out.write("QUIT\r\n");
             out.flush();
 
-            if (!(response = in.readLine()).startsWith("221"))
+            if (!(in.readLine()).startsWith("221"))
                 return false;
-            System.out.println(response);
 
             /* Fermeture des flux */
             in.close();
@@ -94,7 +84,6 @@ public class SmtpClient {
 
             return true;
         } catch (IOException e) {
-            System.out.println(e.getMessage());
             return false;
         }
     }

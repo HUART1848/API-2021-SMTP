@@ -29,7 +29,7 @@ public class Message {
         String newSubject = tmp.split("\n")[0].split(": ")[1];
         newSubject = String.format("Subject: =?utf-8?Q?%s?=", newSubject);
 
-        message = tmp.replaceFirst(".*?\n", newSubject);
+        message = tmp.replaceFirst(".*?\r\n", newSubject);
 
         return true;
     }

@@ -18,7 +18,12 @@ public class Group {
         String[] victimList = Parser.getLinesFromFile(filename);
         assert victimList != null;
         if(victimList.length < nbGrp*3)
-            throw new ArithmeticException("User list doesn't have 3 email adresses for " + nbGrp + " groupes");
+            throw new ArithmeticException();
+
+        for (String email : victimList) {
+            if (!email.matches("^(.+)@(.+)$"))
+                throw new IllegalArgumentException();
+        }
 
         Group[] ret = new Group[nbGrp];
 

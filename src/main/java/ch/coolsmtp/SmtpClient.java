@@ -7,10 +7,7 @@ import java.nio.charset.StandardCharsets;
 
 public class SmtpClient {
     private static final String NAME = "coolsmtp";
-    private static final String[] KEYWORDS = new String[]{"EHLO", "MAIL FROM:", "RCPT TO:","DATA"};
-
     private static final Charset STANDARD_CHARSET = StandardCharsets.UTF_8;
-
 
     private String serverAddress;
     private int port;

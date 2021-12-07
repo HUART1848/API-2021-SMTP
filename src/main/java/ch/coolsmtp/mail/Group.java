@@ -3,7 +3,6 @@ package ch.coolsmtp.mail;
 import ch.coolsmtp.util.Parser;
 
 import java.util.Arrays;
-import java.util.Iterator;
 
 public class Group {
 

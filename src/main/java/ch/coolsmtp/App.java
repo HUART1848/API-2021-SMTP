@@ -2,20 +2,17 @@ package ch.coolsmtp;
 
 import ch.coolsmtp.mail.Group;
 import ch.coolsmtp.mail.Person;
-import ch.coolsmtp.util.Parser;
 
 public class App {
     public static void main(String[] args) {
-        Person p0 = new Person(0, "coucou@gmail.com");
-        Person p1 = new Person(1, "coucou@gmail.com");
-        Person p2 = new Person(2, "coucou@gmail.com");
-        Person p3 = new Person(3, "coucou@gmail.com");
-        Person p4 = new Person(4, "coucou@gmail.com");
-
-        Group g0 = new Group(0, p0, p1, p2, p3);
-        System.out.println(g0);
+        System.out.println("=== coolsmtp : SMTP-based app to prank your friends ===\n");
 
         Config config = new Config();
-        config.parseConfigFromFile("src/main/config/config.txt");
+        if (!config.parseConfigFromFile("src/main/config/config.txt")) {
+            System.out.println("ERROR while attempting to load the config file.\n" +
+                    "Please check for config file existence and/or fix config file syntax");
+        } else {
+            System.out.println("Config loaded");
+        }
     }
 }

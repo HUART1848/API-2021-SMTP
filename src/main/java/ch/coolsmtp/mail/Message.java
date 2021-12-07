@@ -1,7 +1,10 @@
 package ch.coolsmtp.mail;
 
 import ch.coolsmtp.util.Parser;
+import jdk.swing.interop.SwingInterOpUtils;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Random;
 
 public class Message {
@@ -17,16 +20,17 @@ public class Message {
             return false;
 
         String[] messages = content.split("===\n");
-        for (String bruh : messages) {
-            System.out.printf("'%s'\n", bruh);
-        }
 
         String tmp = messages[new Random().nextInt(messages.length)];
 
         if (!tmp.startsWith("Subject:"))
             return false;
 
-        message = tmp;
+        String newSubject = tmp.split("\n")[0].split(": ")[1];
+        newSubject = String.format("Subject: =?utf-8?Q?%s?=", newSubject);
+
+        message = tmp.replaceFirst(".*?\n", newSubject);
+
         return true;
     }
 

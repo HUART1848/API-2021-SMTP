@@ -78,4 +78,9 @@ message au hasard depuis la liste dans `config/messages.txt`
 La classe **Parser** implémente les méthodes pour obtenir le texte entier des fichiers de config ainsi que leurs
 versions ligne par ligne sous forme de tableau de String.
 
-La classe **Config** permet d'obtenir les informations contenues dans `config/config.txt`
+La classe **Config** permet d'obtenir et de représenter les informations contenues dans `config/config.txt`
+
+La classe **SmtpClient** est le client SMTP qui envoi un message au serveur en utilisant l'APi Socket. 
+Elle est responsable de la connection au serveur et d'envoyer les messages en suivant le protocole SMTP.
+
+La classe **App** contient la fonction `main`.

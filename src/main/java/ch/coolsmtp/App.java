@@ -1,9 +1,16 @@
+/* Par  : Alice Grunder et Hugo Huart
+   Date : 2021-12-07
+   Desc : Classe principale
+*/
+
 package ch.coolsmtp;
 
 import ch.coolsmtp.mail.Group;
 import ch.coolsmtp.mail.Message;
 
 public class App {
+
+    /* Chemin des fichiers de configuration */
     private static final String CONFIG_PATH = "config/config.txt";
     private static final String USERS_PATH = "config/users.txt";
     private static final String MESSAGES_PATH = "config/messages.txt";
@@ -11,7 +18,7 @@ public class App {
     public static void main(String[] args) {
         System.out.println("=== coolsmtp : SMTP-based app to prank your friends ===");
 
-        /* Config loading */
+        /* Chargement de la configuration */
         Config config = new Config();
         System.out.println("Loading config...");
 
@@ -20,13 +27,13 @@ public class App {
                     "Please check for config file existence and/or fix config file syntax");
             return;
         }
-
         System.out.println("Config loaded");
         System.out.println(config);
 
-        /* Groups loading */
-        System.out.println("Loading groups...");
+        /* Chargement des groupes */
         Group[] groups;
+        System.out.println("Loading groups...");
+
         try {
             groups = Group.parseGroupFromFile(USERS_PATH, config.getNumberOfGroups());
         } catch (ArithmeticException e) {
@@ -38,11 +45,11 @@ public class App {
         }
         System.out.println("Groups loaded");
 
-        /* Sending command */
-        System.out.println("=== PRANK ===");
-
+        /* Envoi des mails */
         SmtpClient client = new SmtpClient(config.getAddress(), config.getPort());
         Message message = new Message();
+
+        System.out.println("=== PRANK ===");
         for (int i = 0; i < groups.length; ++i) {
             if (!message.setRandomMessageFromFile(MESSAGES_PATH)) {
                 System.out.println("ERROR: Failure while attempting to load the message.\n" +

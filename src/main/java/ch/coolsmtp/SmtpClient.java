@@ -1,3 +1,8 @@
+/* Par  : Alice Grunder et Hugo Huart
+   Date : 2021-12-07
+   Desc : Classe modélisant un client SMTP
+*/
+
 package ch.coolsmtp;
 
 import java.io.*;
@@ -18,18 +23,21 @@ public class SmtpClient {
     }
 
     public boolean sendMailPrank(String from, String[] to, String content) {
+        Socket socket;
+        BufferedReader in;
+        BufferedWriter out;
+
         try {
             String tmp;
 
-            Socket socket = new Socket(serverAddress, port);
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), STANDARD_CHARSET));
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), STANDARD_CHARSET));
+            socket = new Socket(serverAddress, port);
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream(), STANDARD_CHARSET));
+            out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), STANDARD_CHARSET));
 
             if (!in.readLine().startsWith("220"))
                 return false;
 
             /* EHLO */
-
             out.write(String.format("EHLO %s\r\n", NAME));
             out.flush();
 

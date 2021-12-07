@@ -1,3 +1,8 @@
+/* Par  : Alice Grunder et Hugo Huart
+   Date : 2021-12-07
+   Desc : Classe modélisant un groupe
+*/
+
 package ch.coolsmtp.mail;
 
 import ch.coolsmtp.util.Parser;
@@ -6,14 +11,29 @@ import java.util.Arrays;
 
 public class Group {
 
-    private String sender;
-    private String[] victims;
+    private final String sender;
+    private final String[] victims;
 
+    /**
+     * Constructeur standard
+     *
+     * @param sender  adresse d'envoi
+     * @param victims adresses des victimes
+     */
     public Group(String sender, String[] victims) {
         this.sender = sender;
         this.victims = victims;
     }
 
+    /**
+     * 'Parsing' du fichier de configurations 'users'
+     *
+     * @param filename nom du fichier de configuration 'users'
+     * @param nbGrp    nombre de groupes à former
+     * @return groupes formés
+     * @throws ArithmeticException      si mauvais nombre de groupes
+     * @throws IllegalArgumentException si mauvaise adresse mail d'un utilisateur
+     */
     public static Group[] parseGroupFromFile(String filename, int nbGrp) throws ArithmeticException, IllegalArgumentException {
         String[] victimList = Parser.getLinesFromFile(filename);
         assert victimList != null;
@@ -54,10 +74,20 @@ public class Group {
         return ret;
     }
 
+    /**
+     * Getter de l'adresse d'envoi
+     *
+     * @return adresse d'envoi
+     */
     public String getSender() {
         return sender;
     }
 
+    /**
+     * Getter des adresses de victimes
+     *
+     * @return adresses de victimes
+     */
     public String[] getVictims() {
         return Arrays.copyOf(victims, victims.length);
     }

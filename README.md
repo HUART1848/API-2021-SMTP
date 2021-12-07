@@ -32,7 +32,7 @@ disponible dans le dossier `mockmock` afin de construire l'image correspondante.
 
 Pour créer et utiliser le conteneur :
 
-1. Se déplacer dans le dossier 'mockmock' et construire l'image avec `docker build -t mockmock .`
+1. Se déplacer dans le dossier `mockmock` et construire l'image avec `docker build -t mockmock .`
 2. Lancer l'image et le serveur sur le port 8282 pour l'interface web et 2525 pour SMTP
    avec `docker run -d -p 2525:2525 -p 8282:8282 mockmock`
 

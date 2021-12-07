@@ -9,6 +9,10 @@ public class Person {
         this.address = address;
     }
 
+    public void setFromFile() {
+
+    }
+
     public String toString() {
         return String.format("Person %d with Address '%s'", no, address);
     }

@@ -1,43 +1,52 @@
 package ch.coolsmtp.mail;
 
+import ch.coolsmtp.util.Parser;
+
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class Group {
-    private int no;
 
-    private Person sender;
-    private Person[] receiver;
+    private String sender;
+    private String[] victims;
 
-    public Group(int no) {
-        this.no = no;
-    }
-
-    public Group(int no, Person sender, Person... receiver) {
-        this.no = no;
+    public Group( String sender, String[] victims) {
         this.sender = sender;
-        this.receiver = Arrays.copyOf(receiver, receiver.length);
+        this.victims = victims;
     }
 
-    public boolean parseGroupFromFile() {
-        return true;
-    }
+    public static Group[] parseGroupFromFile(int nbGrp) {
+        String[] victimList = Parser.getLinesFromFile("config/users.txt");
+        assert victimList != null;
+        if(victimList.length < nbGrp*3)
+            throw new ArithmeticException("User list doesn't have 3 email adresses for " + nbGrp + " groupes");
 
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
+        Group[] ret = new Group[nbGrp];
 
-        sb.append(String.format("=== GROUP %d ===\n", no));
-
-        if (sender == null || receiver == null) {
-            sb.append("Empty group...");
-            return sb.toString();
+        int vicPerGrp = victimList.length/nbGrp;
+        int iterator = 0;
+        int i;
+        for (i = 0; i < nbGrp - 1; ++i){
+            String s = "";
+            String[] v = new String[vicPerGrp-1];
+            for(int j = 0; j < vicPerGrp; ++j){
+                if(j == 0){
+                    s = victimList[iterator++];
+                } else {
+                    v[j-1] = victimList[iterator++];
+                }
+            }
+            ret[i] = new Group(s, v);
         }
 
-        sb.append(String.format("SENDER\n\t%s\n", sender));
+        String s = victimList[iterator++];
+        String[] v = new String[victimList.length - iterator + 1];
+        for(int j = 0; j < v.length; ++j){
+            v[j] = victimList[iterator++];
+        }
 
-        sb.append("RECEIVERS : \n");
-        for (Person p : receiver)
-            sb.append(String.format("\t%s\n", p));
+        ret[i] = new Group(s, v);
 
-        return sb.toString();
+        return ret;
     }
 }

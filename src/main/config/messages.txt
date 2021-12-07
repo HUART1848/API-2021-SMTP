@@ -1,8 +1,0 @@
-Subject : This is a prank !
-
-Congratulations, you got pranked!
-==
-Subject : This isn't a prank.
-
-Congratulations, you didn't get pranked!
-==

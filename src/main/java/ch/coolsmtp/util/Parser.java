@@ -25,8 +25,4 @@ public class Parser {
         String content = getContentFromFile(filename);
         return content == null ? null : content.split("\\n");
     }
-
-    public static String getRandomLineFromFile(String filename) {
-        return getContentFromFile(filename);
-    }
 }

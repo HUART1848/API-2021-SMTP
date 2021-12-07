@@ -9,7 +9,7 @@ public class Group {
     private String sender;
     private String[] victims;
 
-    public Group( String sender, String[] victims) {
+    public Group(String sender, String[] victims) {
         this.sender = sender;
         this.victims = victims;
     }
@@ -17,7 +17,7 @@ public class Group {
     public static Group[] parseGroupFromFile(String filename, int nbGrp) throws ArithmeticException, IllegalArgumentException {
         String[] victimList = Parser.getLinesFromFile(filename);
         assert victimList != null;
-        if(victimList.length < nbGrp*3)
+        if (victimList.length < nbGrp * 3)
             throw new ArithmeticException();
 
         for (String email : victimList) {
@@ -27,17 +27,17 @@ public class Group {
 
         Group[] ret = new Group[nbGrp];
 
-        int vicPerGrp = victimList.length/nbGrp;
+        int vicPerGrp = victimList.length / nbGrp;
         int iterator = 0;
         int i;
-        for (i = 0; i < nbGrp - 1; ++i){
+        for (i = 0; i < nbGrp - 1; ++i) {
             String s = "";
-            String[] v = new String[vicPerGrp-1];
-            for(int j = 0; j < vicPerGrp; ++j){
-                if(j == 0){
+            String[] v = new String[vicPerGrp - 1];
+            for (int j = 0; j < vicPerGrp; ++j) {
+                if (j == 0) {
                     s = victimList[iterator++];
                 } else {
-                    v[j-1] = victimList[iterator++];
+                    v[j - 1] = victimList[iterator++];
                 }
             }
             ret[i] = new Group(s, v);
@@ -45,7 +45,7 @@ public class Group {
 
         String s = victimList[iterator++];
         String[] v = new String[victimList.length - iterator];
-        for(int j = 0; j < v.length; ++j){
+        for (int j = 0; j < v.length; ++j) {
             v[j] = victimList[iterator++];
         }
 

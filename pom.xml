@@ -24,7 +24,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ch.coolsmtp.Main</mainClass>
+                            <mainClass>ch.coolsmtp.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

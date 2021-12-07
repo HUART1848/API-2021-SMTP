@@ -1,4 +1,8 @@
-bonjour
-comment ça va
-très bien merci
-je m'appelle X Æ A-12
+Subject : This is a prank !
+
+Congratulations, you got pranked!
+==
+Subject : This isn't a prank.
+
+Congratulations, you didn't get pranked!
+==

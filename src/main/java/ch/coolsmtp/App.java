@@ -1,8 +1,5 @@
 package ch.coolsmtp;
 
-import ch.coolsmtp.mail.Group;
-import ch.coolsmtp.mail.Person;
-
 public class App {
     public static void main(String[] args) {
         System.out.println("=== coolsmtp : SMTP-based app to prank your friends ===");
@@ -16,6 +13,5 @@ public class App {
 
         System.out.println("Config loaded");
         System.out.println(config);
-
     }
 }

@@ -2,6 +2,8 @@ package ch.coolsmtp.mail;
 
 import ch.coolsmtp.util.Parser;
 
+import java.util.Random;
+
 public class Message {
     private String message;
 
@@ -9,12 +11,22 @@ public class Message {
 
     }
 
-    public boolean getMessageFromFile(String filename) {
-        String tmp = Parser.getContentFromFile(filename);
-        if (tmp == null || !tmp.startsWith("Subject:"))
+    public boolean setRandomMessageFromFile(String filename) {
+        String content = Parser.getContentFromFile(filename);
+        if (content == null)
             return false;
 
-        this.message = tmp;
+        String[] messages = content.split("===\n");
+        for (String bruh : messages) {
+            System.out.printf("'%s'\n", bruh);
+        }
+
+        String tmp = messages[new Random().nextInt(messages.length)];
+
+        if (!tmp.startsWith("Subject:"))
+            return false;
+
+        message = tmp;
         return true;
     }
 

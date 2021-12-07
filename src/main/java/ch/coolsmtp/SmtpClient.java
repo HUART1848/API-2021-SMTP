@@ -71,7 +71,7 @@ public class SmtpClient {
                 return false;
             System.out.println(response);
 
-            out.write(String.format("%s\r\n.\r\n", content));
+            out.write(String.format("Content-type: text/plain; charset=\"utf-8\"\r\n%s\r\n.\r\n", content));
             out.flush();
 
             if (!(response = in.readLine()).startsWith("250"))

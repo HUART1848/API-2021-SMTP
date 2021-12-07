@@ -15,8 +15,8 @@ public class Group {
         this.victims = victims;
     }
 
-    public static Group[] parseGroupFromFile(int nbGrp) {
-        String[] victimList = Parser.getLinesFromFile("config/users.txt");
+    public static Group[] parseGroupFromFile(String filename, int nbGrp) {
+        String[] victimList = Parser.getLinesFromFile(filename);
         assert victimList != null;
         if(victimList.length < nbGrp*3)
             throw new ArithmeticException("User list doesn't have 3 email adresses for " + nbGrp + " groupes");
@@ -40,7 +40,7 @@ public class Group {
         }
 
         String s = victimList[iterator++];
-        String[] v = new String[victimList.length - iterator + 1];
+        String[] v = new String[victimList.length - iterator];
         for(int j = 0; j < v.length; ++j){
             v[j] = victimList[iterator++];
         }

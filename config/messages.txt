@@ -1,0 +1,11 @@
+Subject: This is a prank !
+
+Congratulations, you got pranked!
+===
+Subject: This is not a prank !
+
+Congratulations, you didn't get pranked!
+===
+Subject: Thïs mäy bẽ a pränk?
+
+Congrätülätiöns? Did you get pranked? Who knows!

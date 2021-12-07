@@ -40,7 +40,7 @@ public class Group {
         }
 
         String s = victimList[iterator++];
-        String[] v = new String[victimList.length - iterator + 1];
+        String[] v = new String[victimList.length - iterator];
         for(int j = 0; j < v.length; ++j){
             v[j] = victimList[iterator++];
         }

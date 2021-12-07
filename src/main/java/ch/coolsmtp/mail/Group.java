@@ -49,4 +49,12 @@ public class Group {
 
         return ret;
     }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public String[] getVictims() {
+        return Arrays.copyOf(victims, victims.length);
+    }
 }

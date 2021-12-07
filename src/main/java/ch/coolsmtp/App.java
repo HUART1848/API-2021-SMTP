@@ -4,6 +4,10 @@ import ch.coolsmtp.mail.Group;
 import ch.coolsmtp.mail.Message;
 
 public class App {
+    private static final String CONFIG_PATH = "config/config.txt";
+    private static final String USERS_PATH = "config/users.txt";
+    private static final String MESSAGES_PATH = "config/messages.txt";
+
     public static void main(String[] args) {
         System.out.println("=== coolsmtp : SMTP-based app to prank your friends ===");
 
@@ -11,7 +15,7 @@ public class App {
         Config config = new Config();
         System.out.println("Loading config...");
 
-        if (!config.parseConfigFromFile("config/config.txt")) {
+        if (!config.parseConfigFromFile(CONFIG_PATH)) {
             System.out.println("ERROR: Failure while attempting to load the config file.\n" +
                     "Please check for config file existence and/or fix config file syntax");
             return;
@@ -24,7 +28,7 @@ public class App {
         System.out.println("Loading groups...");
         Group[] groups;
         try {
-            groups = Group.parseGroupFromFile("config/users.txt", config.getNumberOfGroups());
+            groups = Group.parseGroupFromFile(USERS_PATH, config.getNumberOfGroups());
         } catch (ArithmeticException e) {
             System.out.println("ERROR: There is not enough users for the specified number of groups");
             return;
@@ -40,16 +44,16 @@ public class App {
         SmtpClient client = new SmtpClient(config.getAddress(), config.getPort());
         Message message = new Message();
         for (int i = 0; i < groups.length; ++i) {
-            if (!message.setRandomMessageFromFile("config/messages.txt")) {
+            if (!message.setRandomMessageFromFile(MESSAGES_PATH)) {
                 System.out.println("ERROR: Failure while attempting to load the message.\n" +
-                        "Please check for 'messages.txt' file existence and/or fix 'messages.txt' file syntax");
+                        "Please check for the 'messages' file existence and/or fix the 'messages' file syntax");
                 return;
             }
 
             if (!client.sendMailPrank(groups[i].getSender(), groups[i].getVictims(), message.getMessage()))
-                System.out.printf("Error sending prank for Group %d\n", i);
+                System.out.printf("ERROR: Failure while attempting to send prank for Group %d\n", i);
             else
-                System.out.printf("Prank for group %d sent\n", i);
+                System.out.printf("OK : Prank for group %d sent\n", i);
         }
     }
 }

@@ -1,4 +1,4 @@
-package ch.coolsmtp;
+package ch.coolsmtp.mail;
 
 public class Person {
     private int no;

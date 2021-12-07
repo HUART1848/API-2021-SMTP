@@ -1,4 +1,4 @@
-package ch.coolsmtp;
+package ch.coolsmtp.mail;
 
 import java.util.Arrays;
 

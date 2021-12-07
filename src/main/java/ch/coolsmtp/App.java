@@ -1,5 +1,8 @@
 package ch.coolsmtp;
 
+import ch.coolsmtp.mail.Group;
+import ch.coolsmtp.mail.Person;
+
 public class App {
     public static void main(String[] args) {
         Person p0 = new Person(0, "coucou@gmail.com");

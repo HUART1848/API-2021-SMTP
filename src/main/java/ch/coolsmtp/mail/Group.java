@@ -14,7 +14,7 @@ public class Group {
         this.victims = victims;
     }
 
-    public static Group[] parseGroupFromFile(String filename, int nbGrp) {
+    public static Group[] parseGroupFromFile(String filename, int nbGrp) throws ArithmeticException, IllegalArgumentException {
         String[] victimList = Parser.getLinesFromFile(filename);
         assert victimList != null;
         if(victimList.length < nbGrp*3)

@@ -63,9 +63,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
    format suivant `lorem@ipsum.ut`.
    _Attention il faut assez d'adresses e-mail pour avoir au moins 3 personnes par groupes._
 
-Une fois les fichiers de configuration modifiés comme voulu il faut, depuis la racine du projet, lancer la
-commande `java -jar target/coolsmtp-1.0-SNAPSHOT.jar`
-et les emails seront envoyé, moyennant des fichiers de configs sans erreurs.
+Une fois les fichiers de configuration modifiés comme voulu il faut depuis la racine du projet, lancer la compilation du
+paquet à l'aide de Maven. Puis, toujours depuis la racine du projet, lancer la
+commande `java -jar target/coolsmtp-1.0-SNAPSHOT.jar`. Il faut faire bien attention à ce que la commande`java -jar` soit
+effectuée dans le répertoire où se situe le dossier `config`. Une fois l'application démarrée, les emails seront
+envoyés, moyennant des fichiers de configuration sans erreurs.
 
 ## 5. Implémentation
 
@@ -80,7 +82,7 @@ versions ligne par ligne sous forme de tableau de String.
 
 La classe **Config** permet d'obtenir et de représenter les informations contenues dans `config/config.txt`
 
-La classe **SmtpClient** est le client SMTP qui envoi un message au serveur en utilisant l'APi Socket. 
-Elle est responsable de la connection au serveur et d'envoyer les messages en suivant le protocole SMTP.
+La classe **SmtpClient** est le client SMTP qui envoi un message au serveur en utilisant l'APi Socket. Elle est
+responsable de la connection au serveur et d'envoyer les messages en suivant le protocole SMTP.
 
 La classe **App** contient la fonction `main`.

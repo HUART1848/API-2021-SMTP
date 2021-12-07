@@ -18,7 +18,12 @@ public class App {
         System.out.println("Config loaded");
         System.out.println(config);
 
-        Group g = new Group(0);
-        System.out.println(g);
+        SmtpClient client = new SmtpClient(config.getAddress(), config.getPort());
+
+        if(!client.sendMailPrank("bob@salut.com", "salut@bob.com", "")) {
+            System.out.println("erreur send");
+        } else {
+            System.out.println("cool send");
+        }
     }
 }

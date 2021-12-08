@@ -7,6 +7,8 @@ package ch.coolsmtp.mail;
 
 import ch.coolsmtp.util.Parser;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Random;
 
 public class Message {
@@ -38,10 +40,10 @@ public class Message {
 
         /* Prise en charge d'utf-8 dans le sujet */
         String newSubject = tmp.split("\n")[0].split(": ")[1];
-        newSubject = String.format("Subject: =?utf-8?Q?%s?=", newSubject);
+        newSubject = String.format("Subject: =?utf-8?B?%s?=\n", Base64.getEncoder().encodeToString(newSubject.getBytes(StandardCharsets.UTF_8)));
 
-        message = tmp.replaceFirst(".*?\r\n", newSubject);
-
+        message = tmp.replaceFirst(".*?\n", newSubject);
+        System.out.println(message);
         return true;
     }
 

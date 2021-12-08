@@ -4,7 +4,7 @@
 
 ## 1. Introduction
 
-Ce programme envoi un e-mail "prank" forgés. Ceci est fait avec l'API Socket en créant un client SMTP.
+Ce programme envoie des e-mails "prank" forgés. Ceci est fait avec l'API Socket en créant un client SMTP.
 
 Ce programme permet de voir à quel point il est facile de faire de faux e-mails.
 
@@ -30,19 +30,19 @@ Le serveur "MockMock" est directement fourni dans ce repo, dans le dossier `mock
 Pour l'utiliser directement comme un serveur SMTP mock tournant dans un conteneur Docker, un fichier `Dockerfile` est
 disponible dans le dossier `mockmock` afin de construire l'image correspondante.
 
-Pour créer et utiliser le conteneur :
+Pour créer et utiliser le conteneur (Si besoin, recompiler "MockMock" auparavant) :
 
 1. Se déplacer dans le dossier `mockmock` et construire l'image avec `docker build -t mockmock .`
-2. Lancer l'image et le serveur sur le port 8282 pour l'interface web et 2525 pour SMTP
+2. Lancer le conteneur et le serveur sur le port 2525 pour SMTP et 8282 pour l'interface web
    avec `docker run -d -p 2525:2525 -p 8282:8282 mockmock`
 
 ## 4. Comment utiliser coolsmtp
 
-Le programme prend une liste d'adresse e-mail et la sépare en un nombre de groupes prédéterminé. Pour chaque groupe le
+Le programme prend une liste d'adresses e-mail et la sépare en un nombre de groupes prédéterminé. Pour chaque groupe, le
 programme envoie un message pris au hasard dans une liste donnée en utilisant la première adresse du groupe comme
-envoyeur du message et le reste comme récepteurs du message.
+expéditeur du message et le reste comme destinataires du message.
 
-Il y a 3 fichiers important à modifier dans le dossier **"config"** :
+Il y a 3 fichiers importants à modifier dans le dossier **"config"** :
 
 1. **"config.txt"** : Ce fichier contient l'adresse (1ère ligne) et le port du serveur (2e ligne) ainsi que le nombre de
    groupes attendu (3e ligne) :
@@ -66,8 +66,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
    format suivant `lorem@ipsum.ut`.
    _Attention il faut assez d'adresses e-mail pour avoir au moins 3 personnes par groupes._
 
-Une fois les fichiers de configuration modifiés comme voulu il faut depuis la racine du projet, lancer la compilation du
-paquet à l'aide de Maven. Puis, toujours depuis la racine du projet, lancer la
+Une fois les fichiers de configuration modifiés comme voulu, il faut lancer la compilation du
+paquet à l'aide de Maven depuis la racine du projet. Puis, toujours depuis la racine du projet, lancer la
 commande `java -jar target/coolsmtp-1.0-SNAPSHOT.jar`. Il faut faire bien attention à ce que la commande`java -jar` soit
 effectuée dans le répertoire où se situe le dossier `config`.
 
@@ -75,8 +75,8 @@ Une fois l'application démarrée, les emails seront envoyés, moyennant des fic
 
 ## 5. Implémentation
 
-La classe **Group** représente l'adresse e-mail de l'envoyeur et les adresses des victimes. Elle implémente une méthode
-qui renvoi un tableau de `Group` à partir de `config/users.txt` en vérifiant qu'il n'y ait pas d'erreur.
+La classe **Group** représente l'adresse e-mail de l'expéditeur et les adresses des victimes. Elle implémente une méthode
+qui renvoie un tableau de `Group` à partir de `config/users.txt` en vérifiant qu'il n'y ait pas d'erreur.
 
 La classe **Message** représente les messages que l'on peut envoyer. Elle implémente une méthode qui permet d'avoir un
 message au hasard depuis la liste dans `config/messages.txt`
@@ -86,7 +86,7 @@ versions ligne par ligne sous forme de tableau de String.
 
 La classe **Config** permet d'obtenir et de représenter les informations contenues dans `config/config.txt`
 
-La classe **SmtpClient** est le client SMTP qui envoi un message au serveur en utilisant l'APi Socket. Elle est
-responsable de la connection au serveur et d'envoyer les messages en suivant le protocole SMTP.
+La classe **SmtpClient** est le client SMTP qui envoie un message au serveur en utilisant l'APi Socket. Elle est
+responsable de la connexion au serveur et de l'envoi de messages en suivant le protocole SMTP.
 
 La classe **App** contient la fonction `main`.

@@ -43,7 +43,7 @@ public class Message {
         newSubject = String.format("Subject: =?utf-8?B?%s?=\n", Base64.getEncoder().encodeToString(newSubject.getBytes(StandardCharsets.UTF_8)));
 
         message = tmp.replaceFirst(".*?\n", newSubject);
-        System.out.println(message);
+
         return true;
     }
 
